@@ -19,13 +19,24 @@ The techniques we will be comparing include:
 
    - K-means clustering
    - Mean shift clustering
+   - Expectation Maximization clustering
 
 2. Graph-based approaches:
 
    - Min-cut
    - Normalized cut
 
-3. TODO
+3. Neural network based approach:
+
+   - Mask R-CNN
+   
+The feature spaces we will be exploring include:
+
+   - RGB
+   - RGB + position
+   - HSV
+   - HSV + position
+   - Texture
 
 TODO
 
