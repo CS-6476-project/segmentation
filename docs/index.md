@@ -9,7 +9,7 @@ layout: default
 
 ## Problem statement
 
-The goal of our project is to compare different segmentation methods that we have learned about in class with the current state-of-the-art technique. We will also explore how different feature spaces effect clustering and graph based approaches to segmentation.
+The goal of our project is to compare different segmentation methods that we have learned about in class with current state-of-the-art techniques. We will also explore how different feature spaces affect clustering and graph based approaches to segmentation.
 
 ## Approach
 
@@ -35,7 +35,7 @@ TODO
 
 # Team Members
 
-- Anand Chaturvedi, TODO
+- Anand Chaturvedi, achaturvedi32
 - Prabhav Chawla, pchawla8
 - Pranshav Thakkar, pthakkar7
 - Sanskriti Rathi, srathi7
