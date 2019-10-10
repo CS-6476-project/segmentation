@@ -47,7 +47,7 @@ We will treat the Mask R-CNN architecture and algorithm as a black box and make 
 
 ## Experiments and results
 
-We will be using the BSDS500 (Berkeley Segmentation) dataset. This dataset consists of 500 color images, which are split into 200 training, 100 validation, and 200 test images. Each segmentation method will be evaluated on this dataset.
+We will be using the BSDS500 (Berkeley Segmentation) dataset [1]. This dataset consists of 500 color images, which are split into 200 training, 100 validation, and 200 test images. Each segmentation method will be evaluated on this dataset.
 
 We will use the following existing code:
 
@@ -68,13 +68,18 @@ We will write our own code for the following:
 We will evaluate the segmentation algorithms in two ways:
 
 1. Find the segment boundaries and evaluate boundary benchmarks like the F-measure.
-2. Evaluate the quality of segment regions using clustering metrics such as Rand Index, Variation of Information and Segmentation Covering [1].
+2. Evaluate the quality of segment regions using clustering metrics such as Rand Index, Variation of Information and Segmentation Covering [2].
 
 We expect the experiment results to favor the Mask R-CNN approach, but we are curious to see how well classical CV techniques perform in comparison. It is expected that normalized-cut will perform better than min-cut since min-cut tends to pull out small isolated components. Amongst the clustering-based approaches, mean-shift should edge out k-means since it doesn’t make any assumptions about the data distribution. It will be interesting to see how different feature spaces impact each of the algorithms.
 
 ## Citation
 
-[1] Arbelaez, Pablo & Maire, Michael & Fowlkes, Charless & Malik, Jitendra. (2011). Contour Detection and Hierarchical Image Segmentation. IEEE transactions on pattern analysis and machine intelligence. 33. 898-916. 10.1109/TPAMI.2010.161.
+[1] D. Martin, C. Fowlkes, D. Tal, and J. Malik. A database of human segmented natural
+images and its application to evaluating segmentation algorithms and measuring eco-
+logical statistics. In Proc. 8th Int’l Conf. Computer Vision, volume 2, pages 416–423,
+July 2001.
+
+[2] Arbelaez, Pablo & Maire, Michael & Fowlkes, Charless & Malik, Jitendra. (2011). Contour Detection and Hierarchical Image Segmentation. IEEE transactions on pattern analysis and machine intelligence. 33. 898-916. 10.1109/TPAMI.2010.161.
 
 # Team Members
 
