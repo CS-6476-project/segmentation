@@ -72,7 +72,7 @@ We will evaluate the segmentation algorithms in two ways:
 
 We expect the experiment results to favor the Mask R-CNN approach, but we are curious to see how well classical CV techniques perform in comparison. It is expected that normalized-cut will perform better than min-cut since min-cut tends to pull out small isolated components. Amongst the clustering-based approaches, mean-shift should edge out k-means since it doesn’t make any assumptions about the data distribution. It will be interesting to see how different feature spaces impact each of the algorithms.
 
-## Citation
+## References
 
 [1] D. Martin, C. Fowlkes, D. Tal, and J. Malik. A database of human segmented natural
 images and its application to evaluating segmentation algorithms and measuring eco-
