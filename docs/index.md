@@ -31,8 +31,8 @@ The techniques we will be comparing include:
 
 We will use the following feature spaces:
 
-1. RGB Color
-2. RGB Color + Position
+1. RGB color
+2. RGB color + Position
 3. HSV color
 4. HSV color + Position
 5. Texture using the Gabor filter bank
@@ -61,16 +61,16 @@ We will use the following existing code:
 We will write our own code for the following:
 
 - Mapping pixels to feature spaces. Utility functions to convert between color spaces will help but we will have to write most of the code ourselves.
-- Finding the textons, the texton histogram and then clustering the histograms.
-- Our own configuration and dataset parsing script to run the Mask R-CNN code on the BSDS500 dataset. Since this dataset doesn’t have enough examples to train a deep learning model from scratch, we will have to take a transfer learning approach and use weights trained from the COCO dataset.
+- Finding the textons, the texton histograms and then clustering the histograms.
+- Our own configuration and dataset parsing scripts to run the Mask R-CNN code on the BSDS500 dataset. Since this dataset doesn’t have enough examples to train a deep learning model from scratch, we will have to take a transfer learning approach and use weights trained from the COCO dataset.
 - Code to compute metrics and quantitatively evaluate the quality of our segmentation. We will also aim to show interesting visualizations comparing the results from different methods.
 
 We will evaluate the segmentation algorithms in two ways:
 
-1. Find the segment boundaries and evaluate boundary benchmarks like the F-measure.
+1. Find the segment boundaries and evaluate boundary benchmarks using the F-measure metric [2].
 2. Evaluate the quality of segment regions using clustering metrics such as Rand Index, Variation of Information and Segmentation Covering [2].
 
-We expect the experiment results to favor the Mask R-CNN approach, but we are curious to see how well classical CV techniques perform in comparison. It is expected that normalized-cut will perform better than min-cut since min-cut tends to pull out small isolated components. Amongst the clustering-based approaches, mean-shift should edge out k-means since it doesn’t make any assumptions about the data distribution. It will be interesting to see how different feature spaces impact each of the algorithms.
+We expect the experiment results to favor the Mask R-CNN approach, but we are curious to see how well classical CV techniques perform in comparison. It is expected that normalized-cut will perform better than min-cut since min-cut tends to pull out small isolated components. Amongst the clustering-based approaches, mean-shift should edge out k-means since k-means is biased towards finding circular data distributions. It will be interesting to see how different feature spaces impact each of the algorithms.
 
 ## References
 
