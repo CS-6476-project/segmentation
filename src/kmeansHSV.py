@@ -37,7 +37,7 @@ def kmeansHSV(imgDir, k):
     img_name = os.path.splitext(img_base_name)[0]
     obj_arr = np.empty((1,), dtype=np.object)
     obj_arr[0] = outputImg
-    savemat(os.path.join(output_dir, "%s.mat" % img_name), {segs_str: obj_arr})
+    savemat(os.path.join(output_dir, "%s.mat" % img_name), {'segs': obj_arr})
     #savemat('IMGAGE_NAME.mat', {'segs': obj_arr})
     # return [outputImg, centers]
 
