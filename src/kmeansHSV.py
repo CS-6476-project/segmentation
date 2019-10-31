@@ -46,7 +46,7 @@ if __name__ == '__main__':
     root_dir = '..'
     data_dir = os.path.join(root_dir, 'BSDS500', 'BSDS500', 'data')
     test_img_dir = os.path.join(data_dir, 'images', 'test')
-    output_dir = os.path.join(data_dir, segs_str)
+    output_dir = os.path.join(root_dir, 'src', segs_str)
 
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
