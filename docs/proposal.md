@@ -1,37 +1,15 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
 layout: default
-title: Team SegFault
+title: Project Proposal
 ---
 
-# Mid-Term Project Update
+# Project Proposal
 
-## Abstract
+## Problem statement
 
 The goal of our project is to compare different segmentation methods that we have learned about in class with current state-of-the-art techniques. We will also explore how different feature spaces affect clustering and graph-based approaches to segmentation.
 
-For this milestone, we have compared the KMeans and Mean Shift algorithms in terms of how well they perform in segmentation on the BSDS500 dataset of images. We also compared the feature spaces of color (RGB or HSV) and color + position (pixel coordinates).
-
-## Teaser Figure
-
-<div style="display: flex; justify-content: space-between; align-items: center;">
-  <img src="assets/original_196027.png" style="height: auto; width: 120px">
-  <img src="assets/ground_truth_196027.png" style="height: auto; width: 120px"> 
-  <img src="assets/k_means_rgb_196027.png" style="height: auto; width: 120px"> 
-  <img src="assets/mean_shift_rgb_196027.png" style="height: auto; width: 120px"> 
-  <img src="assets/k_means_hsv_pos_196027.png" style="height: auto; width: 120px"> 
-  <img src="assets/mean_shift_hsv_pos_196027.png" style="height: auto; width: 120px"> 
-</div>
-
-## Introduction
-
-The motivation behind our project is to compare how different methods and feature spaces affect segmentation, testing what we have learned in class. The final objective is to see how methods learned in class compare against state-of-the-art methods for segmentation.
-
-The application of this project is to allow for exploration of how different methods fare while using different feature spaces for segmentation of images.
-
-The domain for our project consists of regular RGB images, taken from the BSDS500 dataset. These are images that have been picked for segmentation and have ground truth human annotations available, but we are using the raw images to see how our methods compare.
+The expected input to our system will be images from our chosen dataset. The desired output will be a graph/some visualization depicting and analyzing which segmentation methods worked better. There will also be a visual comparison between techniques learned in class and current state-of-the-art techniques.
 
 ## Approach
 
@@ -57,9 +35,7 @@ We will use the following feature spaces:
 4. HSV color + Position
 5. Texture using the Gabor filter bank
 
-We are using the k-means and mean-shift methods from the ‘scikit-learn’ library.
-
-For each feature space, k-means is run for each test image, with the number of clusters being determined by mean-shift, when run for the same image.
+For each feature space, k-means will be run multiple times with different centroid seeds and the final result will be the best output of the consecutive runs in terms of Sum of Squared Error. The initialized centroids will be generally distant from each other, and we will use Euclidean distance as our distance function.
 
 The bandwidth parameter for mean shift clustering will be estimated by the library code, and the number of modes found by mean shift will be used as the value of k in k-means.
 
@@ -67,13 +43,9 @@ Graph-based approaches will also be run for each feature space. Affinity weight 
 
 We will treat the Mask R-CNN architecture and algorithm as a black box and make only minor modifications to suit our dataset’s needs.
 
-For each of these algorithms, we use the benchmarking code provided by BSDS-500 to get consistent metrics that we can use to compare them. One of the obstacles we faced was figuring out how to convert our segmented images into a format that can be input into the benchmarking code, especially since our code is in python and the benchmark code is in Matlab.
+## Experiments and results
 
-## Experiments and Results
-
-We used the Berkeley Segmentation Data Set and Benchmarks 500 as our dataset, and we ran our algorithms on the test dataset that they provided. This test set contains 200 images in total.
-
-For this milestone, we have implemented the clustering algorithms (k-means and mean-shift) on the following four feature spaces: RGB, RGB + position, HSV, HSV + position.
+We will be using the BSDS500 (Berkeley Segmentation) dataset [1]. This dataset consists of 500 color images, which are split into 200 training, 100 validation, and 200 test images. Each segmentation method will be evaluated on this dataset.
 
 We will use the following existing code:
 
@@ -98,10 +70,6 @@ We will evaluate the segmentation algorithms in two ways:
 
 We expect the experiment results to favor the Mask R-CNN approach, but we are curious to see how well classical CV techniques perform in comparison. It is expected that normalized-cut will perform better than min-cut since min-cut tends to pull out small isolated components. Amongst the clustering-based approaches, mean-shift should edge out k-means since k-means is biased towards finding circular data distributions. It will be interesting to see how different feature spaces impact each of the algorithms.
 
-## Qualitative Results
-
-## Conclusion and Futurework
-
 ## References
 
 [1] D. Martin, C. Fowlkes, D. Tal, and J. Malik. A database of human segmented natural
@@ -110,12 +78,3 @@ logical statistics. In Proc. 8th Int’l Conf. Computer Vision, volume 2, pages 
 July 2001.
 
 [2] Arbelaez, Pablo & Maire, Michael & Fowlkes, Charless & Malik, Jitendra. (2011). Contour Detection and Hierarchical Image Segmentation. IEEE transactions on pattern analysis and machine intelligence. 33. 898-916. 10.1109/TPAMI.2010.161.
-
-# Team Members
-
-- Anand Chaturvedi, achaturvedi32
-- Prabhav Chawla, pchawla8
-- Pranshav Thakkar, pthakkar7
-- Sanskriti Rathi, srathi7
-
-### [Link to project proposal](./proposal.md)
