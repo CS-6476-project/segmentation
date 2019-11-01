@@ -18,7 +18,7 @@ def main():
     im = io.imread(img_path)
     hsv_im = rgb2hsv(im)
 
-    # quantizeHSV(hsv_im, img_base_name)
+    quantizeHSV(hsv_im, img_base_name)
     quantizeHSVAndPos(hsv_im, img_base_name)
 
 
@@ -88,12 +88,13 @@ if __name__ == '__main__':
   root_dir = '..'
 
   data_dir = os.path.join(root_dir, 'BSDS500', 'BSDS500', 'data')
+  segs_dir = os.path.join(data_dir, segs_str)
 
-  output_dir = os.path.join(data_dir, segs_str, 'mean_shift')
+  ms_output_dir = os.path.join(segs_dir, 'mean_shift')
   test_img_dir = os.path.join(data_dir, 'images', 'test')
 
-  hsv_output_dir = os.path.join(output_dir, hsv_str)
-  hsv_pos_output_dir = os.path.join(output_dir, hsv_pos_str)
+  hsv_output_dir = os.path.join(ms_output_dir, hsv_str)
+  hsv_pos_output_dir = os.path.join(ms_output_dir, hsv_pos_str)
 
   for directory in [hsv_output_dir, hsv_pos_output_dir]:
     if not os.path.exists(directory):
@@ -105,10 +106,10 @@ if __name__ == '__main__':
 
   main()
 
-  # with open(os.path.join(output_dir, '%s.pickle' % hsv_str), 'wb') as f:
-  #   pickle.dump(hsv_modes_dict, f)
-  #   print("\nPickle file created for HSV feature space")
+  with open(os.path.join(ms_output_dir, '%s.pickle' % hsv_str), 'wb') as f:
+    pickle.dump(hsv_modes_dict, f)
+    print("\nPickle file created for HSV feature space")
 
-  with open(os.path.join(output_dir, '%s.pickle' % hsv_pos_str), 'wb') as f:
+  with open(os.path.join(ms_output_dir, '%s.pickle' % hsv_pos_str), 'wb') as f:
     pickle.dump(hsv_pos_modes_dict, f)
     print("\nPickle file for HSV + Pos feature space")
