@@ -8,15 +8,15 @@ from scipy.io import savemat
 import pickle
 
 def quantizeRGB(img_path, k):
-    origImg = image.imread(img_path).astype(np.uint8);
-    pixels = np.reshape(origImg, (-1,3)).astype('float');
+    origImg = image.imread(img_path).astype(np.uint8)
+    pixels = np.reshape(origImg, (-1,3)).astype('float')
 
     kMeans = KMeans(k).fit(pixels)
     clusterCenters = kMeans.cluster_centers_
     labels = kMeans.labels_
-    labeledPixels = clusterCenters[labels]
+    # labeledPixels = clusterCenters[labels]
 
-    outputImg = np.reshape(labeledPixels, origImg.shape).astype('uint8');    
+    outputImg = np.reshape(labels, origImg.shape[:2]).astype('uint8');    
 
     mat_arr = np.empty((1,), dtype=np.object)
     mat_arr[0] = outputImg
@@ -49,24 +49,27 @@ def quantizeRGBwithPos(img_path, k):
     # segmentedImg = clusterCenters[outputImg]
 
 def main():
-    # infile = open("rgb_modes_dict.pickle", "rb")
-    infile = open("rgb_pos_modes_dict.pickle", "rb")
+    infile = open("rgb_modes_dict.pickle", "rb")
+    #infile = open("rgb_pos_modes_dict.pickle", "rb")
     kDict = pickle.load(infile)
     infile.close()
 
     for key in kDict:
         print("\nImage %s" % key)
         img_path = os.path.join(test_img_dir, key)
-        # quantizeRGB(img_path, kDict[key])
-        quantizeRGBwithPos(img_path, kDict[key])
+        if (kDict[key] == 1):
+            kDict[key] = 2
+            # print("\nImage %s" % key)
+        quantizeRGB(img_path, kDict[key])
+            # quantizeRGBwithPos(img_path, kDict[key])
 
 if __name__ == '__main__':
 
     root_dir = '..'
     data_dir = os.path.join(root_dir, 'BSDS500', 'BSDS500', 'data')
     test_img_dir = os.path.join(data_dir, 'images', 'test')
-    # output_dir = os.path.join(root_dir, 'src', 'k_means_RGB_files')
-    output_dir = os.path.join(root_dir, 'src', 'k_means_RGB_pos_files')
+    output_dir = os.path.join(root_dir, 'src', 'k_means_RGB_files')
+    # output_dir = os.path.join(root_dir, 'src', 'k_means_RGB_pos_files')
 
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
