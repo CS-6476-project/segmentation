@@ -37,39 +37,39 @@ def quantizeRGBwithPos(img_path, k):
     kMeans = KMeans(k).fit(pixels)
     clusterCenters = kMeans.cluster_centers_
     labels = kMeans.labels_
-    # labeledPixels = clusterCenters[labeledPixels]
+    
     outputImg = np.reshape(labels, imgShape[:2]).astype('uint8')
+
     mat_arr = np.empty((1,), dtype=np.object)
     mat_arr[0] = outputImg
     img_base_name = os.path.basename(img_path)
     img_name = os.path.splitext(img_base_name)[0]
-    savemat(os.path.join(output_dir_pos, "%s.mat" % img_name), {'segs': mat_arr})
+    savemat(os.path.join(output_dir, "%s.mat" % img_name), {'segs': mat_arr})
 
     # segmentedImg = clusterCenters[outputImg]
 
 def main():
-    infile = open("rgb_modes_dict.pickle", "rb")
+    # infile = open("rgb_modes_dict.pickle", "rb")
+    infile = open("rgb_pos_modes_dict.pickle", "rb")
     kDict = pickle.load(infile)
     infile.close()
 
     for key in kDict:
         print("\nImage %s" % key)
         img_path = os.path.join(test_img_dir, key)
-        quantizeRGB(img_path, kDict[key])
+        # quantizeRGB(img_path, kDict[key])
+        quantizeRGBwithPos(img_path, kDict[key])
 
 if __name__ == '__main__':
 
     root_dir = '..'
     data_dir = os.path.join(root_dir, 'BSDS500', 'BSDS500', 'data')
     test_img_dir = os.path.join(data_dir, 'images', 'test')
-    output_dir = os.path.join(root_dir, 'src', 'k_means_RGB_files')
-    output_dir_pos = os.path.join(data_dir, 'src', 'k_means_RGB_pos_files')
+    # output_dir = os.path.join(root_dir, 'src', 'k_means_RGB_files')
+    output_dir = os.path.join(root_dir, 'src', 'k_means_RGB_pos_files')
 
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-
-    if not os.path.exists(output_dir_pos):
-        os.makedirs(output_dir_pos)
 
     main()
 
