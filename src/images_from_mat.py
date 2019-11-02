@@ -4,7 +4,7 @@ from scipy.io import loadmat
 from skimage import io
 import numpy as np
 
-image_base_name = '196027.jpg'
+image_base_name = '235098.jpg'
 
 feature_spaces = ['hsv', 'hsv_pos', 'rgb', 'rgb_pos']
 
@@ -19,14 +19,19 @@ test_img_dir = os.path.join(data_dir, 'images', 'test')
 
 image_name = os.path.splitext(image_base_name)[0]
 
+output_dir = os.path.join('.', image_name)
+if not os.path.exists(output_dir):
+  os.makedirs(output_dir)
+
 for directory in [ms_output_dir, km_output_dir]:
   for fs in feature_spaces:
     mat = loadmat(os.path.join(directory, fs, '%s.mat' % image_name))
     # hopefully you don't have more than 256 clusters...
-    segs = np.uint8(mat['segs'][0, 0]) 
+    segs = np.uint8(mat['segs'][0, 0])
+    num_segs = np.unique(segs).size
 
     dir_base = os.path.basename(directory)
-    plt.imsave('%s_%s_%s.png' % (dir_base, fs, image_name), segs)
+    plt.imsave(os.path.join(output_dir, '%s_%s_num=%d.png' % (dir_base, fs, num_segs)), segs)
 
 # Save any one groundTruth segments
 groundTruth = loadmat(os.path.join(groud_truth_dir, '%s.mat' % image_name))
@@ -34,7 +39,8 @@ groundTruthSegs = groundTruth['groundTruth']
 to_pick = np.random.randint(groundTruthSegs.shape[1])
 groundTruthSegs = groundTruthSegs[0, to_pick][0, 0]
 groundTruthSegs = np.uint8(groundTruthSegs[0])
-plt.imsave('ground_truth_%s.png' % image_name, groundTruthSegs)
+num_segs = np.unique(groundTruthSegs).size
+plt.imsave(os.path.join(output_dir, 'ground_truth_num=%d.png' % num_segs), groundTruthSegs)
 
-# Save the original image here as well for convenience 
-plt.imsave('original_%s.png' % image_name, io.imread(os.path.join(test_img_dir, image_base_name)))
+# Save the original image here as well for convenience
+plt.imsave(os.path.join(output_dir, 'original.png'), io.imread(os.path.join(test_img_dir, image_base_name)))
