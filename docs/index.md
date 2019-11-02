@@ -100,6 +100,19 @@ We expect the experiment results to favor the Mask R-CNN approach, but we are cu
 
 ## Qualitative Results
 
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <img src="assets/145059/original.png" style="height: auto; width: 150px">
+  <img src="assets/145059/ground_truth_num=26.png" style="height: auto; width: 150px"> 
+  <img src="assets/145059/k_means_rgb_num=7.png" style="height: auto; width: 150px"> 
+  <img src="assets/145059/mean_shift_rgb_num=7.png" style="height: auto; width: 150px">
+  <img src="assets/145059/k_means_hsv_num=7.png" style="height: auto; width: 150px"> 
+  <img src="assets/145059/mean_shift_hsv_num=7.png" style="height: auto; width: 150px">
+  <img src="assets/145059/k_means_rgb_pos_num=5.png" style="height: auto; width: 150px"> 
+  <img src="assets/145059/mean_shift_rgb_pos_num=5.png" style="height: auto; width: 150px"> 
+  <img src="assets/145059/k_means_hsv_pos_num=8.png" style="height: auto; width: 150px"> 
+  <img src="assets/145059/mean_shift_hsv_pos_num=8.png" style="height: auto; width: 150px"> 
+</div>
+
 ## Conclusion and Futurework
 
 ## References
