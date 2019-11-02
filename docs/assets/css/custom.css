@@ -1,0 +1,44 @@
+#teaserContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#teaserContainer > img {
+ height: auto;
+ width: 120px; 
+}
+
+#resultsContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.resultsColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.resultImageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.resultImageContainer > img {
+  width: auto;
+  height: 200px;
+}
+
+#resultLabels {
+  list-style-type: lower-alpha;
+}
+
+.main-content table {
+  display: table;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto; 
+}
