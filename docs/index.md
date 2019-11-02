@@ -75,6 +75,19 @@ We used the Berkeley Segmentation Data Set and Benchmarks 500 as our dataset, an
 
 For this milestone, we have implemented the clustering algorithms (k-means and mean-shift) on the following four feature spaces: RGB, RGB + position, HSV, HSV + position.
 
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <img src="assets/145059/original.png" style="height: auto; width: 150px">
+  <img src="assets/145059/ground_truth_num=26.png" style="height: auto; width: 150px"> 
+  <img src="assets/145059/k_means_rgb_num=7.png" style="height: auto; width: 150px"> 
+  <img src="assets/145059/mean_shift_rgb_num=7.png" style="height: auto; width: 150px">
+  <img src="assets/145059/k_means_hsv_num=7.png" style="height: auto; width: 150px"> 
+  <img src="assets/145059/mean_shift_hsv_num=7.png" style="height: auto; width: 150px">
+  <img src="assets/145059/k_means_rgb_pos_num=5.png" style="height: auto; width: 150px"> 
+  <img src="assets/145059/mean_shift_rgb_pos_num=5.png" style="height: auto; width: 150px"> 
+  <img src="assets/145059/k_means_hsv_pos_num=8.png" style="height: auto; width: 150px"> 
+  <img src="assets/145059/mean_shift_hsv_pos_num=8.png" style="height: auto; width: 150px"> 
+</div>
+
 We will use the following existing code:
 
 - Texture: Garbor kernel implementation in the skimage library.
