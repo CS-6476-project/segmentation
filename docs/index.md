@@ -109,45 +109,30 @@ We illustrate our results for a couple of images:
 
 <div id="resultsContainer">
   <div class="resultsColumn">
-    <div class="resultImageContainer"><img src="assets/couple_145059/original.png" />(a)</div>
-    <div class="resultImageContainer"><img src="assets/couple_145059/ground_truth_num=26.png" />(b)</div> 
-    <div class="resultImageContainer"><img src="assets/couple_145059/k_means_rgb_num=7.png" />(c)</div>
-    <div class="resultImageContainer"><img src="assets/couple_145059/mean_shift_rgb_num=7.png" />(d)</div>
-    <div class="resultImageContainer"><img src="assets/couple_145059/k_means_hsv_num=7.png" />(e)</div>
-    <div class="resultImageContainer"><img src="assets/couple_145059/mean_shift_hsv_num=7.png" />(f)</div>
-    <div class="resultImageContainer"><img src="assets/couple_145059/k_means_rgb_pos_num=5.png" />(g)</div>
-    <div class="resultImageContainer"><img src="assets/couple_145059/mean_shift_rgb_pos_num=5.png" />(h)</div>
-    <div class="resultImageContainer"><img src="assets/couple_145059/k_means_hsv_pos_num=8.png" />(i)</div>
-    <div class="resultImageContainer"><img src="assets/couple_145059/mean_shift_hsv_pos_num=8.png" />(j)</div>
+    <div class="resultImageContainer"><img src="assets/couple_145059/original.png" />Original Image</div>
+    <div class="resultImageContainer"><img src="assets/couple_145059/ground_truth_num=26.png" />Ground truth segmentation</div> 
+    <div class="resultImageContainer"><img src="assets/couple_145059/k_means_rgb_num=7.png" />K-Means, RGB space segmentation</div>
+    <div class="resultImageContainer"><img src="assets/couple_145059/mean_shift_rgb_num=7.png" />Mean Shift, RGB space segmentation</div>
+    <div class="resultImageContainer"><img src="assets/couple_145059/k_means_hsv_num=7.png" />K-Means, HSV space segmentation</div>
+    <div class="resultImageContainer"><img src="assets/couple_145059/mean_shift_hsv_num=7.png" />Mean Shift, HSV space segmentation</div>
+    <div class="resultImageContainer"><img src="assets/couple_145059/k_means_rgb_pos_num=5.png" />K-Means, RGB + Position space segmentation</div>
+    <div class="resultImageContainer"><img src="assets/couple_145059/mean_shift_rgb_pos_num=5.png" />Mean Shift, RGB + Position space segmentation</div>
+    <div class="resultImageContainer"><img src="assets/couple_145059/k_means_hsv_pos_num=8.png" />K-Means, HSV + Position space segmentation</div>
+    <div class="resultImageContainer"><img src="assets/couple_145059/mean_shift_hsv_pos_num=8.png" />Mean Shift, HSV + Position space segmentation</div>
   </div>
   <div class="resultsColumn">
-    <div class="resultImageContainer"><img src="assets/taj_288024/original.png" />(a)</div>
-    <div class="resultImageContainer"><img src="assets/taj_288024/ground_truth_num=32.png" />(b)</div>
-    <div class="resultImageContainer"><img src="assets/taj_288024/k_means_rgb_num=4.png" />(c)</div>
-    <div class="resultImageContainer"><img src="assets/taj_288024/mean_shift_rgb_num=4.png" />(d)</div>
-    <div class="resultImageContainer"><img src="assets/taj_288024/k_means_hsv_num=3.png" />(e)</div>
-    <div class="resultImageContainer"><img src="assets/taj_288024/mean_shift_hsv_num=3.png" />(f)</div>
-    <div class="resultImageContainer"><img src="assets/taj_288024/k_means_rgb_pos_num=5.png" />(g)</div> 
-    <div class="resultImageContainer"><img src="assets/taj_288024/mean_shift_rgb_pos_num=5.png" />(h)</div> 
-    <div class="resultImageContainer"><img src="assets/taj_288024/k_means_hsv_pos_num=4.png" />(i)</div> 
-    <div class="resultImageContainer"><img src="assets/taj_288024/mean_shift_hsv_pos_num=4.png" />(j)</div>
+    <div class="resultImageContainer"><img src="assets/taj_288024/original.png" />Original Image</div>
+    <div class="resultImageContainer"><img src="assets/taj_288024/ground_truth_num=32.png" />Ground truth segmentation</div>
+    <div class="resultImageContainer"><img src="assets/taj_288024/k_means_rgb_num=4.png" />K-Means, RGB space segmentation</div>
+    <div class="resultImageContainer"><img src="assets/taj_288024/mean_shift_rgb_num=4.png" />Mean Shift, RGB space segmentation</div>
+    <div class="resultImageContainer"><img src="assets/taj_288024/k_means_hsv_num=3.png" />K-Means, HSV space segmentation</div>
+    <div class="resultImageContainer"><img src="assets/taj_288024/mean_shift_hsv_num=3.png" />Mean Shift, HSV space segmentation</div>
+    <div class="resultImageContainer"><img src="assets/taj_288024/k_means_rgb_pos_num=5.png" />K-Means, RGB + Position space segmentation</div> 
+    <div class="resultImageContainer"><img src="assets/taj_288024/mean_shift_rgb_pos_num=5.png" />Mean Shift, RGB + Position space segmentation</div> 
+    <div class="resultImageContainer"><img src="assets/taj_288024/k_means_hsv_pos_num=4.png" />K-Means, HSV + Position space segmentation</div> 
+    <div class="resultImageContainer"><img src="assets/taj_288024/mean_shift_hsv_pos_num=4.png" />Mean Shift, HSV + Position space segmentation</div>
   </div>
 </div>
-
-For each collection of images, top-to-bottom labeling:
-
-<ol id="resultLabels">
-  <li>Original Image</li>
-  <li>Ground truth segmentation</li>
-  <li>K-Means, RGB space segmentation</li>
-  <li>Mean Shift, RGB space segmentation</li>
-  <li>K-Means, HSV space segmentation</li>
-  <li>Mean Shift, HSV space segmentation</li>
-  <li>K-Means, RGB + Position space segmentation</li>
-  <li>Mean Shift, RGB + Position space segmentation</li>
-  <li>K-Means, HSV + Position space segmentation</li>
-  <li>Mean Shift, HSV + Position space segmentation</li>
-</ol>
 
 ## Conclusion and Futurework
 
