@@ -1,3 +1,6 @@
 [submodule "BSDS500"]
 	path = BSDS500
 	url = https://github.com/CS-6476-project/BSDS500.git
+[submodule "PyTorch-Encoding"]
+	path = PyTorch-Encoding
+	url = https://github.com/CS-6476-project/PyTorch-Encoding.git
