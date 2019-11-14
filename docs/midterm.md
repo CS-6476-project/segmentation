@@ -1,9 +1,6 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
 layout: default
-title: Team SegFault
+title: Mid-Term Update
 ---
 
 <link rel="stylesheet" href="assets/css/custom.css">
@@ -161,14 +158,3 @@ logical statistics. In Proc. 8th Int’l Conf. Computer Vision, volume 2, pages 
 July 2001.
 
 [2] Arbelaez, Pablo & Maire, Michael & Fowlkes, Charless & Malik, Jitendra. (2011). Contour Detection and Hierarchical Image Segmentation. IEEE transactions on pattern analysis and machine intelligence. 33. 898-916. 10.1109/TPAMI.2010.161.
-
-# Team Members
-
-- Anand Chaturvedi, achaturvedi32
-- Prabhav Chawla, pchawla8
-- Pranshav Thakkar, pthakkar7
-- Sanskriti Rathi, srathi7
-
-### [Link to project proposal](./proposal.md)
-
-### [Link to midterm update](./midterm.md)
