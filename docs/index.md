@@ -8,13 +8,15 @@ title: Team SegFault
 
 <link rel="stylesheet" href="assets/css/custom.css">
 
-# Mid-Term Project Update
+# Final Project Update
 
 ## Abstract
 
 The goal of our project is to compare different segmentation methods that we have learned about in class with current state-of-the-art techniques. We will also explore how different feature spaces affect clustering and graph-based approaches to segmentation.
 
-For this milestone, we have written code to parse the Berkeley Segmentation image dataset (BSDS500) to extract various feature spaces from images, to run the K-Means and Mean Shift algorithms and to evaluate our segments using standard clustering metrics. According to our preliminary results, Mean Shift outperforms K-Means, and the HSV + Position feature space shows the most promising results.
+**TODO** @Anand _Edit:_
+
+~~For this milestone, we have written code to parse the Berkeley Segmentation image dataset (BSDS500) to extract various feature spaces from images, to run the K-Means and Mean Shift algorithms and to evaluate our segments using standard clustering metrics. According to our preliminary results, Mean Shift outperforms K-Means, and the HSV + Position feature space shows the most promising results.~~
 
 ## Teaser Figure
 
@@ -26,6 +28,7 @@ For this milestone, we have written code to parse the Berkeley Segmentation imag
   <img src="assets/teaser_196027/k_means_hsv_pos.png" /> 
   <img src="assets/teaser_196027/mean_shift_hsv_pos.png" /> 
 </div>
+**TODO** @Prabhav _Add another row of pictures?_
 
 ## Introduction
 
@@ -33,9 +36,13 @@ The motivation behind our project is to compare different segmentation technique
 
 The domain for our project consists of regular RGB images, taken from the BSDS500 dataset. The dataset contains 200 training, 100 validation, and 200 test images and human annotations for all these images, which serve as the ground truth segmentations. The BSDS500 is an industry-standard for evaluating segmentation and contour detection algorithms. [1]
 
-So far, we have been able to assess K-Means and Mean Shift’s performance on the test images. Using the ground truth, we have calculated region and boundary benchmarks, which are discussed in the Results section.
+**TODO** @Anand _Edit or Delete:_
+
+~~So far, we have been able to assess K-Means and Mean Shift’s performance on the test images. Using the ground truth, we have calculated region and boundary benchmarks, which are discussed in the Results section.~~
 
 ## Approach
+
+**TODO** @Anand _Add/Edit content related to final update_
 
 We ran K-Means and Mean Shift algorithms on the following four feature spaces:
 
@@ -53,11 +60,13 @@ We used the benchmarking code provided by the BSDS500 dataset maintainers to obt
 1. F-measure; used to evaluate segment boundaries. [2]
 2. Probabilistic Rand Index (PRI), Variation of Information (VOI) and Segmentation Covering; region-based metrics used to evaluate the quality of segments. [2]
 
-Each metric was averaged across the 200 test images and reported twice - once while choosing an optimal scale for the entire dataset (ODS) and the other when selecting an optimal scale per image (OIS). For simplicity's sake, we only report the OIS measures here.
-
 An obstacle we faced was figuring out how to convert our segmented images into a format that can be interpreted by the benchmarking code. This was especially challenging since we wrote our code in Python, but the benchmarking code has been written in MATLAB.
 
+**TODO** @Prabhav _Mention that setting up environment for Deep Learning approach was a challenge?_
+
 ## Experiments and Results
+
+**TODO** @?? _Split the following appropriately between the Mean Shift and K-Means sub-sections. Also complete the two sub-sections by adding any missing content._
 
 First, we focused on running the Mean Shift algorithm since the results would be used to determine 'k' values for K-Means.
 
@@ -69,7 +78,36 @@ We followed the following experimental set-up:
 4. Save the number of clusters, for each image and feature space, in a dictionary for later use by K-Means.
 5. Assign clustering labels to image pixels (basically, perform a mapping from feature space to image space). Save segmented images to disk in a format expected by the benchmarking code.
 
-The above process was repeated for K-Means (leaving out certain Mean Shift specific steps). In total, we had 1600 segmented images (200 images × 4 feature spaces/image × 2 clustering algorithms) and 200 ground truth segments to run our benchmarking code.
+The above process was repeated for K-Means (leaving out certain Mean Shift specific steps).
+
+### Mean Shift
+
+**TODO** @?? _See TODO above_
+
+### K-Means
+
+**TODO** @?? _See TODO above_
+
+### Min-Cut
+
+**TODO** @Pranshav
+
+### Normalized Cut
+
+**TODO** @Sanskriti
+
+### Context Encoding Network (EncNet)
+
+**TODO** @Prabhav
+
+<br/>
+**TODO** @Prabhav _Update the following with the latest figures:_
+
+~~In total, we had 1600 segmented images (200 images × 4 feature spaces/image × 2 clustering algorithms) and 200 ground truth segments to run our benchmarking code.~~
+
+### Quantitative Results
+
+**TODO** @Prabhav _Add/Edit content related to final update. Don't forget the graph!_
 
 The following table summarizes the F-measure metric:
 
@@ -105,6 +143,8 @@ As far as feature spaces are concerned, HSV + Position achieves the best metrics
 
 ## Qualitative Results
 
+**TODO** @Prabhav _Add/Edit content related to final update. Don't forget the web-app link!_
+
 We illustrate our results for a couple of images:
 
 <div id="resultsContainer">
@@ -136,7 +176,9 @@ We illustrate our results for a couple of images:
 
 ## Conclusion and Futurework
 
-In the coming weeks, we would like to repeat the same process for two graph-based and a deep-learning, state-of-the-art approaches. We will also aim to incorporate texture as a feature space in computing our results.
+**TODO** @?? _Add/Edit content related to final update_
+
+~~In the coming weeks, we would like to repeat the same process for two graph-based and a deep-learning, state-of-the-art approaches. We will also aim to incorporate texture as a feature space in computing our results.~~
 
 ## References
 

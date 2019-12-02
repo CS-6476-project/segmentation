@@ -32,10 +32,6 @@
   height: 200px;
 }
 
-#resultLabels {
-  list-style-type: lower-alpha;
-}
-
 .main-content table {
   display: table;
   width: auto;
