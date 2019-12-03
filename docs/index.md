@@ -87,7 +87,7 @@ We followed the following experimental set-up:
 
 ### K-Means
 
-The process described above was repeated for K-Means (leaving out certain Mean Shift specific steps). Sample output for all feature spaces is shown below:
+The process described above was repeated for K-Means (leaving out certain Mean Shift specific steps). Sample [output](https://cs-6476-project.herokuapp.com/?q=235098) for all feature spaces is shown below:
 
 <div class="resultsContainer">
   <div class="resultImageContainer">
@@ -238,7 +238,7 @@ We illustrate our results for a sample image:
   </div>
 </div>
 
-To view more results, please visit the website: <https://cs-6476-project.herokuapp.com/>. On every page load, the website randomly picks an image from the test set and displays the corresponding segmented images.
+To view more results, please visit the website: <https://cs-6476-project.herokuapp.com>. On every page load, the website randomly picks an image from the test set and displays the corresponding segmented images.
 
 ## Conclusion and Futurework
 
