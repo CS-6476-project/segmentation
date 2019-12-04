@@ -2,7 +2,7 @@ from skimage import data, segmentation, color
 from skimage.future import graph
 from matplotlib import pyplot as plt
 import random
-import numpy as np
+
 
 def contract(g, v, w):
     wNeighbors = g.neighbors(w)
@@ -10,16 +10,16 @@ def contract(g, v, w):
     for node in wNeighbors:
         if node != v:
             g.add_edge(v, node)
-            vNeighbors = list(g.neighbors(v))
         g.remove_edge(node, w)
         if node != v:
             g.add_edge(node, v)
     wNeighbors = g.neighbors(w)
     wNeighbors = list(wNeighbors)
-    if g.node[v]['labels'] == None:
-        g.node[v]['labels'] = []
-    g.node[v]['labels'] = g.node[v]['labels'] + (g.node[w]['labels'])
+    if g.nodes[v]['labels'] == None:
+        g.nodes[v]['labels'] = []
+    g.nodes[v]['labels'] = g.nodes[v]['labels'] + (g.nodes[w]['labels'])
     g.remove_node(w)
+
 
 img = data.coffee()
 
@@ -29,20 +29,20 @@ g = graph.rag_mean_color(img, labels1, mode='similarity')
 
 while len(g) > 10:
     v = random.choice(list(g.nodes))
-    #print(v)
+    # print(v)
     vNeighbors = g.neighbors(v)
     list1 = list(vNeighbors)
-    #print(list1)
+    # print(list1)
     w = random.choice((list1))
-    #print(w)
+    # print(w)
     contract(g, v, w)
 
 print(g.nodes)
 labels = [[] for i in range(10)]
 counter = 0
 for node in g.nodes:
-    print(g.node[node])
-    labels[counter] = labels[counter] + g.node[node]['labels']
+    print(g.nodes[node])
+    labels[counter] = labels[counter] + g.nodes[node]['labels']
     counter = counter + 1
 print(labels)
 
@@ -56,14 +56,9 @@ for x in range(labels2.shape[0]):
                 labels2[x][y] = labels[z][0]
 
 
-#print(labels2)
+# print(labels2)
 
 out2 = color.label2rgb(labels2, img, kind='avg')
 
-plt.imshow(out2)
+plt.imshow(labels2)
 plt.show()
-
-
-
-
-
