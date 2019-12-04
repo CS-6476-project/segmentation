@@ -24,6 +24,16 @@
   font-style: italic;
 }
 
+#graphContainer {
+  display: flex;
+  justify-content: center;
+}
+
+#graph {
+  width: auto;
+  height: 520px;
+}
+
 .main-content table {
   display: table;
   width: auto;

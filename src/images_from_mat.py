@@ -2,6 +2,7 @@ import os
 import matplotlib.pyplot as plt
 from scipy.io import loadmat
 from skimage import io
+# This code is not that flexible. Use https://cs-6476-project.herokuapp.com/?q=FILE_NAME instead
 import numpy as np
 
 image_base_name = '235098.jpg'
@@ -12,8 +13,7 @@ root_dir = '..'
 data_dir = os.path.join(root_dir, 'BSDS500', 'BSDS500', 'data')
 segs_dir = os.path.join(data_dir, 'segs')
 
-km_output_dir = os.path.join(segs_dir, 'k_means')
-ms_output_dir = os.path.join(segs_dir, 'mean_shift')
+segs_dir_names = ['k_means', 'mean_shift', 'normalized_cut']
 groud_truth_dir = os.path.join(data_dir, 'groundTruth', 'test')
 test_img_dir = os.path.join(data_dir, 'images', 'test')
 
@@ -23,9 +23,9 @@ output_dir = os.path.join('.', image_name)
 if not os.path.exists(output_dir):
   os.makedirs(output_dir)
 
-for directory in [ms_output_dir, km_output_dir]:
+for directory in segs_dir_names:
   for fs in feature_spaces:
-    mat = loadmat(os.path.join(directory, fs, '%s.mat' % image_name))
+    mat = loadmat(os.path.join(segs_dir, directory, fs, '%s.mat' % image_name))
     # hopefully you don't have more than 256 clusters...
     segs = np.uint8(mat['segs'][0, 0])
     num_segs = np.unique(segs).size

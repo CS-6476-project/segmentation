@@ -61,8 +61,6 @@ We used the benchmarking code provided by the BSDS500 dataset maintainers to obt
 
 An obstacle we faced was figuring out how to convert our segmented images into a format that can be interpreted by the benchmarking code. This was especially challenging since we wrote our code in Python, but the benchmarking code has been written in MATLAB.
 
-**TODO** @Pranshav _Mention libraries used to implement Min Cut. Any obstacles faced? Any design choices, or judgment calls?_
-
 **TODO** @Sanskriti _Mention libraries used to implement Normalized Cut. Any obstacles faced? Any design choices, or judgment calls?_
 
 For the state-of-the-art deep learning approach, we chose the Context Encoding Network (EncNet) implementation by H. Zhang et al. (2018) [3]. The training code and pre-trained models are readily available on [GitHub](https://github.com/zhanghang1989/PyTorch-Encoding). We decided against taking a transfer learning approach since the BSDS500 dataset lacks class labels, so tuning a larger, pre-trained EncNet on BSDS500 was not possible without a lot of manual annotation work. In some sense, this is good test of EncNet's ability to generalize to a novel dataset that it has not seen before.
@@ -96,31 +94,27 @@ The process described above was repeated for K-Means (leaving out certain Mean S
   </div>
   <div class="resultImageContainer">
     <img src="assets/roller_coaster_235098/ground_truth_num=21.png" />
-    <span>Ground truth, <span class="italic">k = 21</span></span>
+    <span>Ground truth, <span class="italic">segs=21</span></span>
   </div>
   <div class="resultImageContainer">
     <img src="assets/roller_coaster_235098/k_means_rgb_num=7.png" />
-    <span>RGB space, <span class="italic">k = 7</span></span>
+    <span>RGB space, <span class="italic">segs=7</span></span>
   </div>
     <div class="resultImageContainer">
     <img src="assets/roller_coaster_235098/k_means_hsv_num=7.png" />
-    <span>HSV space, <span class="italic">k = 7</span></span>
+    <span>HSV space, <span class="italic">segs=7</span></span>
   </div>
     <div class="resultImageContainer">
     <img src="assets/roller_coaster_235098/k_means_rgb_pos_num=8.png" />
-    <span>RGB + Position space, <span class="italic">k = 9</span></span>
+    <span>RGB + Pos space, <span class="italic">segs=9</span></span>
   </div>
     <div class="resultImageContainer">
     <img src="assets/roller_coaster_235098/k_means_hsv_pos_num=9.png" />
-    <span>HSV + Position space, <span class="italic">k = 9</span></span>
+    <span>HSV + Pos space, <span class="italic">segs=9</span></span>
   </div>
 </div>
 
 For this particular image, all feature spaces do a reasonably good job. The impact of adding position is very apparent based on the output above - the sky is segmented into more parts when pixel position is taken into account.
-
-### Min-Cut
-
-**TODO** @Pranshav
 
 ### Normalized Cut
 
@@ -136,12 +130,12 @@ We treated the EncNet implementation as a black box and did not make any modific
     Original image
   </div>
   <div class="resultImageContainer">
-    <img src="assets/lady_cloth_80085/ground_truth.png" />
-    Ground truth
+    <img src="assets/lady_cloth_80085/ground_truth_num=28.png" />
+    <span>Ground truth, <span class="italic">segs=28</span></span>
   </div>
   <div class="resultImageContainer">
-    <img src="assets/lady_cloth_80085/encnet.png" />
-    EncNet
+    <img src="assets/lady_cloth_80085/encnet_num=12.png" />
+    <span>EncNet, <span class="italic">segs=12</span></span>
   </div>
 </div>
 
@@ -149,37 +143,51 @@ The EncNet approach is very good at segmenting individual objects from the backg
 
 ### Quantitative Results
 
-We ran our benchmarking code on a total of 3400 segmented images (200 test images × 4 feature spaces/image × 4 approaches with feature spaces + 200 test images × 1 approach without feature spaces) and 200 ground truth segments.
+We ran our benchmarking code on a total of 2600 segmented images (200 test images × 4 feature spaces/image × 3 approaches with feature spaces + 200 test images × 1 approach without feature spaces) and 200 ground truth segments.
 
 **TODO** @Prabhav _Add/Edit content related to final update. Don't forget the graph!_
 
-The following table summarizes the F-measure metric:
+The following graph summarizes the F-measure metric:
 
-| Segmentation Approach            | F-measure |
-| -------------------------------- | :-------: |
-| K-Means, RGB space               |   0.38    |
-| Mean Shift, RGB space            |   0.45    |
-| K-Means, HSV space               |   0.41    |
-| Mean Shift, HSV space            |   0.49    |
-| K-Means, RGB + Position space    |   0.44    |
-| Mean Shift, RGB + Position space |   0.48    |
-| K-Means, HSV + Position space    |   0.46    |
-| Mean Shift, HSV + Position space |   0.50    |
-| EncNet                           |   0.44    |
+<div id="graphContainer">
+  <img src="assets/f_measure_graph.png" id="graph"/>
+</div>
+
+<!--
+| Segmentation Approach           | F-measure |
+| ------------------------------- | :-------: |
+| K-Means, RGB space              |   0.38    |
+| Mean Shift, RGB space           |   0.45    |
+| Normalized Cut, RGB space       |   0.58    |
+| K-Means, HSV space              |   0.41    |
+| Mean Shift, HSV space           |   0.49    |
+| Normalized Cut, HSV space       |   0.56    |
+| K-Means, RGB + Pos space        |   0.44    |
+| Mean Shift, RGB + Pos space     |   0.48    |
+| Normalized Cut, RGB + Pos space |   0.49    |
+| K-Means, HSV + Pos space        |   0.46    |
+| Mean Shift, HSV + Pos space     |   0.50    |
+| Normalized Cut, HSV + Pos space |   0.51    |
+| EncNet                          |   0.44    |
+-->
 
 The following table summarizes our region-based metrics:
 
-| Segmentation Approach            | PRI  | VOI  | Covering |
-| -------------------------------- | :--: | ---- | -------- |
-| K-Means, RGB space               | 0.69 | 3.32 | 0.32     |
-| Mean Shift, RGB space            | 0.67 | 2.88 | 0.39     |
-| K-Means, HSV space               | 0.69 | 3.00 | 0.36     |
-| Mean Shift, HSV space            | 0.61 | 2.47 | 0.41     |
-| K-Means, RGB + Position space    | 0.71 | 2.63 | 0.36     |
-| Mean Shift, RGB + Position space | 0.70 | 2.60 | 0.40     |
-| K-Means, HSV + Position space    | 0.73 | 2.79 | 0.37     |
-| Mean Shift, HSV + Position space | 0.70 | 2.41 | 0.44     |
-| EncNet                           | 0.74 | 2.06 | 0.52     |
+| Segmentation Approach           | PRI  | VOI  | Covering |
+| ------------------------------- | :--: | ---- | -------- |
+| K-Means, RGB space              | 0.69 | 3.32 | 0.32     |
+| Mean Shift, RGB space           | 0.67 | 2.88 | 0.39     |
+| Normalized Cut, RGB space       | 0.75 | 2.19 | 0.50     |
+| K-Means, HSV space              | 0.69 | 3.00 | 0.36     |
+| Mean Shift, HSV space           | 0.61 | 2.47 | 0.41     |
+| Normalized Cut, HSV space       | 0.75 | 2.16 | 0.51     |
+| K-Means, RGB + Pos space        | 0.71 | 2.63 | 0.36     |
+| Mean Shift, RGB + Pos space     | 0.70 | 2.60 | 0.40     |
+| Normalized Cut, RGB + Pos space | 0.75 | 2.68 | 0.44     |
+| K-Means, HSV + Pos space        | 0.73 | 2.79 | 0.37     |
+| Mean Shift, HSV + Pos space     | 0.70 | 2.41 | 0.44     |
+| Normalized Cut, HSV + Pos space | 0.76 | 2.65 | 0.45     |
+| EncNet                          | 0.74 | 2.06 | 0.52     |
 
 Given that a human performs with F = 0.79, our vanilla implementations of simple clustering algorithms don’t perform too bad (Mean Shift obtains F = 0.50).
 
@@ -198,43 +206,60 @@ We illustrate our results for a sample image:
   </div>
   <div class="resultImageContainer">
     <img src="assets/couple_145059/ground_truth_num=26.png" class="largerHeight" />
-    <span>Ground truth, <span class="italic">k = 26</span></span>
+    <span>Ground truth, <span class="italic">segs=26</span></span>
   </div>
   <div class="resultImageContainer">
-    <img src="assets/couple_145059/encnet.png" class="largerHeight" />
-    EncNet
+    <img src="assets/couple_145059/encnet_num=3.png" class="largerHeight" />
+    <span>EncNet, <span class="italic">segs=3</span></span>
   </div> 
   <div class="resultImageContainer">
     <img src="assets/couple_145059/k_means_rgb_num=7.png" class="largerHeight" />
-    <span>K-Means, RGB space, <span class="italic">k = 7</span></span>
+    <span>K-Means, RGB space, <span class="italic">segs=7</span></span>
   </div>
   <div class="resultImageContainer">
     <img src="assets/couple_145059/mean_shift_rgb_num=7.png" class="largerHeight" />
-    <span>Mean Shift, RGB space, <span class="italic">k = 7</span></span>
+    <span>Mean Shift, RGB space, <span class="italic">segs=7</span></span>
+  </div>
+
+  <div class="resultImageContainer">
+    <img src="assets/couple_145059/normalized_cut_rgb_num=71.png" class="largerHeight" />
+    <span>Normalized Cut, RGB space, <span class="italic">segs=71</span></span>
   </div>
   <div class="resultImageContainer">
     <img src="assets/couple_145059/k_means_hsv_num=7.png" class="largerHeight" />
-    <span>K-Means, HSV space, <span class="italic">k = 7</span></span>
+    <span>K-Means, HSV space, <span class="italic">segs=7</span></span>
   </div>
   <div class="resultImageContainer">
     <img src="assets/couple_145059/mean_shift_hsv_num=7.png" class="largerHeight" />
-    <span>Mean Shift, HSV space, <span class="italic">k = 7</span></span>
+    <span>Mean Shift, HSV space, <span class="italic">segs=7</span></span>
+  </div>
+  <div class="resultImageContainer">
+    <img src="assets/couple_145059/normalized_cut_hsv_num=51.png" class="largerHeight" />
+    <span>Normalized Cut, HSV space, <span class="italic">segs=51</span></span>
   </div>
   <div class="resultImageContainer">
     <img src="assets/couple_145059/k_means_rgb_pos_num=5.png" class="largerHeight" />
-    <span>K-Means, RGB + Position space, <span class="italic">k = 5</span></span>
+    <span>K-Means, RGB + Pos space, <span class="italic">segs=5</span></span>
   </div>
   <div class="resultImageContainer">
     <img src="assets/couple_145059/mean_shift_rgb_pos_num=5.png" class="largerHeight" />
-    <span>Mean Shift, RGB + Position space, <span class="italic">k = 5</span></span>
+    <span>Mean Shift, RGB + Pos space, <span class="italic">segs=5</span></span>
+  </div>
+  <div class="resultImageContainer">
+    <img src="assets/couple_145059/normalized_cut_rgb_pos_num=67.png" class="largerHeight" />
+    <span>Normalized Cut, RGB + Pos space, <span class="italic">segs=67</span></span>
   </div>
   <div class="resultImageContainer">
     <img src="assets/couple_145059/k_means_hsv_pos_num=8.png" class="largerHeight" />
-    <span>K-Means, HSV + Position space, <span class="italic">k = 8</span></span>
+    <span>K-Means, HSV + Pos space, <span class="italic">segs=8</span></span>
   </div>
   <div class="resultImageContainer">
     <img src="assets/couple_145059/mean_shift_hsv_pos_num=8.png" class="largerHeight" />
-    <span>Mean Shift, HSV + Position space, <span class="italic">k = 8</span></span>
+    <span>Mean Shift, HSV + Pos space, <span class="italic">segs=8</span></span>
+  </div>
+  <div class="resultImageContainer">
+    <img src="assets/couple_145059/normalized_cut_hsv_pos_num=72.png" class="largerHeight" />
+    <span>Normalized Cut, HSV + Pos space, <span class="italic">segs=72</span></span>
   </div>
 </div>
 
@@ -242,7 +267,7 @@ To view more results, please visit the website: <https://cs-6476-project.herokua
 
 ## Conclusion and Futurework
 
-**TODO** @?? _Add/Edit content related to final update. "In the Conclusions section, you should re-iterate the goals that you had laid out in your mid-term update and clearly mention whether you were able to accomplish those goals. If not, then what were the reasons. Also, in the Future Work section, you should mention any interesting extensions of your project that you can think of."_
+**TODO** @Sanskriti _Add/Edit content related to final update. "In the Conclusions section, you should re-iterate the goals that you had laid out in your mid-term update and clearly mention whether you were able to accomplish those goals. If not, then what were the reasons. Also, in the Future Work section, you should mention any interesting extensions of your project that you can think of."_
 
 ~~In the coming weeks, we would like to repeat the same process for two graph-based and a deep-learning, state-of-the-art approaches. We will also aim to incorporate texture as a feature space in computing our results.~~
 
