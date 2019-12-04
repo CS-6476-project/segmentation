@@ -17,8 +17,8 @@ def main():
     im = io.imread(img_path)
     hsv_im = rgb2hsv(im)
 
-    # quantizeWithPos(im, img_base_name, rgb_pos_output_dir)
-    # quantizeWithPos(hsv_im, img_base_name, hsv_pos_output_dir)
+    quantizeWithPos(im, img_base_name, rgb_pos_output_dir)
+    quantizeWithPos(hsv_im, img_base_name, hsv_pos_output_dir)
     quantizeWithoutPos(im, img_base_name, rgb_output_dir)
     hsv_im_scaled = np.uint8(hsv_im * 255)
     quantizeWithoutPos(hsv_im_scaled, img_base_name, hsv_output_dir)
