@@ -21,8 +21,8 @@
   height: auto;
 }
 
-.largerHeight {
-  height: 250px !important;
+.resultsContainer .largerHeight {
+  height: 250px;
 }
 
 .italic {
