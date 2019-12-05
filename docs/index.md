@@ -77,27 +77,27 @@ We ran the Mean Shift algorithm first since the results would be used to determi
 Below is an [illustration](https://cs-6476-project.herokuapp.com/?q=118015) of outputs for the Mean Shift algorithm:
 
 <div class="resultsContainer">
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/boat_118015/original.jpg" />
     Original image
   </div>
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/boat_118015/118015_ground_truth0.png" />
     <span>Ground truth, <span class="italic">segs=21</span></span>
   </div>
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/boat_118015/118015_MeanShift_RGB_space.png" />
     <span>RGB space, <span class="italic">segs=7</span></span>
   </div>
-    <div class="resultImageContainer">
+    <div>
     <img src="assets/boat_118015/118015_Mean_Shift_HSV_space.png" />
     <span>HSV space, <span class="italic">segs=7</span></span>
   </div>
-    <div class="resultImageContainer">
+    <div>
     <img src="assets/boat_118015/118015_Mean_Shift_RGB+Pos_space.png" />
     <span>RGB + Pos space, <span class="italic">segs=9</span></span>
   </div>
-    <div class="resultImageContainer">
+    <div>
     <img src="assets/boat_118015/118015_Mean_Shift_HSV+Pos_space.png" />
     <span>HSV + Pos space, <span class="italic">segs=9</span></span>
   </div>
@@ -110,27 +110,27 @@ In this example, Mean Shift is able to segment the sky from the rest of the imag
 For K-Means, we repeated the process described above but left out certain Mean Shift specific steps. Sample [output](https://cs-6476-project.herokuapp.com/?q=235098) for all feature spaces is shown below:
 
 <div class="resultsContainer">
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/roller_coaster_235098/original.png" />
     Original image
   </div>
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/roller_coaster_235098/ground_truth_num=21.png" />
     <span>Ground truth, <span class="italic">segs=21</span></span>
   </div>
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/roller_coaster_235098/k_means_rgb_num=7.png" />
     <span>RGB space, <span class="italic">segs=7</span></span>
   </div>
-    <div class="resultImageContainer">
+    <div>
     <img src="assets/roller_coaster_235098/k_means_hsv_num=7.png" />
     <span>HSV space, <span class="italic">segs=7</span></span>
   </div>
-    <div class="resultImageContainer">
+    <div>
     <img src="assets/roller_coaster_235098/k_means_rgb_pos_num=8.png" />
     <span>RGB + Pos space, <span class="italic">segs=9</span></span>
   </div>
-    <div class="resultImageContainer">
+    <div>
     <img src="assets/roller_coaster_235098/k_means_hsv_pos_num=9.png" />
     <span>HSV + Pos space, <span class="italic">segs=9</span></span>
   </div>
@@ -143,27 +143,27 @@ For this particular image, all feature spaces do a reasonably good job. The impa
 For the Normalized Cut implementation, on each picture, we first ran K-Means with a large number of segments and then used the resulting regions to make the Region Adjacency Graph required for a graph-based method like Normalized Cut. Here is the [output](https://cs-6476-project.herokuapp.com/?q=140006) for a sample image:
 
 <div class="resultsContainer">
-  <div class="resultImageContainer">
+  <div>
     <img class="house" src="assets/house_140006/original.jpg" />
     Original image
   </div>
-  <div class="resultImageContainer">
+  <div>
     <img class="house" src="assets/house_140006/ground_truth.png" />
     <span>Ground truth, <span class="italic">segs=10</span></span>
   </div>
-  <div class="resultImageContainer">
+  <div>
     <img class="house" src="assets/house_140006/normalized_cut_rgb.png" />
     <span>RGB space, <span class="italic">segs=28</span></span>
   </div>
-    <div class="resultImageContainer">
+    <div>
     <img class="house" src="assets/house_140006/normalized_cut_hsv.png" />
     <span>HSV space, <span class="italic">segs=22</span></span>
   </div>
-    <div class="resultImageContainer">
+  <div>
     <img class="house" src="assets/house_140006/normalized_cut_rgb_pos.png" />
     <span>RGB + Pos space, <span class="italic">segs=42</span></span>
   </div>
-    <div class="resultImageContainer">
+  <div>
     <img class="house" src="assets/house_140006/normalized_cut_hsv_pos.png" />
     <span>HSV + Pos space, <span class="italic">segs=34</span></span>
   </div>
@@ -176,15 +176,15 @@ For this image, Normalized Cut does a good job of segmenting each of the houses 
 We treated the EncNet implementation as a black box and did not make any modifications to the existing codebase. The pre-trained model uses the ResNet-101 convolutional neural network as a basic feature extractor and the PASCAL-Context dataset for training, which is a standard semantic segmentation dataset consisting of about 30k images and 400+ labels. Unlike our other approaches, the model made predictions on raw, test image data instead of hand-crafted, feature-space specific features. Here is an [illustration](https://cs-6476-project.herokuapp.com/?q=80085) of the output we obtain:
 
 <div class="resultsContainer">
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/lady_cloth_80085/original.jpg" />
     Original image
   </div>
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/lady_cloth_80085/ground_truth_num=28.png" />
     <span>Ground truth, <span class="italic">segs=28</span></span>
   </div>
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/lady_cloth_80085/encnet_num=12.png" />
     <span>EncNet, <span class="italic">segs=12</span></span>
   </div>
@@ -251,64 +251,64 @@ EncNet and Normalized Cut with HSV space perform the best here. Their Probabilis
 We illustrate our results for a sample image:
 
 <div class="resultsContainer">
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/couple_145059/original.png" class="largerHeight" />
     Original image
   </div>
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/couple_145059/ground_truth_num=26.png" class="largerHeight" />
     <span>Ground truth, <span class="italic">segs=26</span></span>
   </div>
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/couple_145059/encnet_num=3.png" class="largerHeight" />
     <span>EncNet, <span class="italic">segs=3</span></span>
   </div> 
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/couple_145059/k_means_rgb_num=7.png" class="largerHeight" />
     <span>K-Means, RGB space, <span class="italic">segs=7</span></span>
   </div>
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/couple_145059/mean_shift_rgb_num=7.png" class="largerHeight" />
     <span>Mean Shift, RGB space, <span class="italic">segs=7</span></span>
   </div>
 
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/couple_145059/normalized_cut_rgb_num=71.png" class="largerHeight" />
     <span>Normalized Cut, RGB space, <span class="italic">segs=71</span></span>
   </div>
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/couple_145059/k_means_hsv_num=7.png" class="largerHeight" />
     <span>K-Means, HSV space, <span class="italic">segs=7</span></span>
   </div>
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/couple_145059/mean_shift_hsv_num=7.png" class="largerHeight" />
     <span>Mean Shift, HSV space, <span class="italic">segs=7</span></span>
   </div>
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/couple_145059/normalized_cut_hsv_num=51.png" class="largerHeight" />
     <span>Normalized Cut, HSV space, <span class="italic">segs=51</span></span>
   </div>
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/couple_145059/k_means_rgb_pos_num=5.png" class="largerHeight" />
     <span>K-Means, RGB + Pos space, <span class="italic">segs=5</span></span>
   </div>
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/couple_145059/mean_shift_rgb_pos_num=5.png" class="largerHeight" />
     <span>Mean Shift, RGB + Pos space, <span class="italic">segs=5</span></span>
   </div>
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/couple_145059/normalized_cut_rgb_pos_num=67.png" class="largerHeight" />
     <span>Normalized Cut, RGB + Pos space, <span class="italic">segs=67</span></span>
   </div>
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/couple_145059/k_means_hsv_pos_num=8.png" class="largerHeight" />
     <span>K-Means, HSV + Pos space, <span class="italic">segs=8</span></span>
   </div>
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/couple_145059/mean_shift_hsv_pos_num=8.png" class="largerHeight" />
     <span>Mean Shift, HSV + Pos space, <span class="italic">segs=8</span></span>
   </div>
-  <div class="resultImageContainer">
+  <div>
     <img src="assets/couple_145059/normalized_cut_hsv_pos_num=72.png" class="largerHeight" />
     <span>Normalized Cut, HSV + Pos space, <span class="italic">segs=72</span></span>
   </div>
