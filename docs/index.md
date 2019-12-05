@@ -14,9 +14,7 @@ title: Team SegFault
 
 The goal of our project is to compare different segmentation methods that we have learned about in class with current state-of-the-art techniques. We will also explore how different feature spaces affect clustering and graph-based approaches to segmentation.
 
-**TODO** @Anand _Edit:_
-
-~~For this milestone, we have written code to parse the Berkeley Segmentation image dataset (BSDS500) to extract various feature spaces from images, to run the K-Means and Mean Shift algorithms and to evaluate our segments using standard clustering metrics. According to our preliminary results, Mean Shift outperforms K-Means, and the HSV + Position feature space shows the most promising results.~~
+We have written code to parse the Berkeley Segmentation image dataset (BSDS500) to extract various feature spaces from images and to run the K-Means, Mean Shift and Normalized Cut algorithms. We also ran a deep learning model, EncNet, and evaluated our segments for all these methods using standard metrics. According to our results, Normalized Cut and EncNet outperform others. The HSV + Position feature space shows the most promising results across algorithms.
 
 ## Teaser Figure
 
@@ -35,22 +33,18 @@ The motivation behind our project is to compare different segmentation technique
 
 The domain for our project consists of regular RGB images, taken from the BSDS500 dataset. The dataset contains 200 training, 100 validation, and 200 test images and human annotations for all these images, which serve as the ground truth segmentations. The BSDS500 is an industry-standard for evaluating segmentation and contour detection algorithms. [1]
 
-**TODO** @Anand _Edit or Delete:_
-
-~~So far, we have been able to assess K-Means and Mean Shift’s performance on the test images. Using the ground truth, we have calculated region and boundary benchmarks, which are discussed in the Results section.~~
+We assessed the performance of clustering, graph-based, and deep learning segmentation techniques on the test images. Using the ground truth, we have calculated region and boundary benchmarks, which are discussed in the Results section.
 
 ## Approach
 
-**TODO** @Anand _Edit the midterm update content and merge content written by others to make this section cohesive._
-
-We ran K-Means and Mean Shift algorithms on the following four feature spaces:
+We ran K-Means, Mean Shift and Normalized Cut algorithms on the following four feature spaces:
 
 1. RGB color
 2. RGB color + Position (x, y pixel coordinates)
 3. HSV color
 4. HSV color + Position (x, y pixel coordinates)
 
-We used Scikit-learn’s implementation of K-Means and Mean Shift. The bandwidth parameter for Mean Shift clustering was estimated using utility functions provided by Scikit-learn.
+We used Scikit-learn’s implementation of these three algorithms. The bandwidth parameter for Mean Shift clustering was estimated using utility functions provided by Scikit-learn.
 
 One drawback of using K-Means is that one has to specify the number of clusters. To avoid blindly trying different ‘k’ values for each image and each feature space, we used the number of modes picked up by Mean Shift as the value of ‘k’ for that particular image and that feature space. Instead of manually looking at each image, and guessing the number of clusters for each feature space of that image, we were able to automate the process and save a great deal of time and computer resources. We believe this choice is justified since it represents domain knowledge injection into our problem.
 
@@ -67,11 +61,11 @@ For the state-of-the-art deep learning approach, we chose the Context Encoding N
 
 ## Experiments and Results
 
-**TODO** @Anand _Split the following appropriately between the Mean Shift and K-Means sub-sections. Also complete the two sub-sections by adding any missing content._
+The chosen segmentation methods all have unique properties, and thus required different experimental setups. We have categorized our experiment by the algorithms below.
 
-First, we focused on running the Mean Shift algorithm since the results would be used to determine 'k' values for K-Means.
+### Mean Shift
 
-We followed the following experimental set-up:
+We ran the Mean Shift algorithm first since the results would be used to determine 'k' values for K-Means. We followed the following experimental set-up to perform Mean Shift:
 
 1. For each test image, compute a representation in all of the four feature spaces. Obtain an array of data for each one of those feature spaces.
 2. Normalize the arrays - each feature vector has a mean of 0 and a standard deviation of 1 after the normalization. Clustering-based approaches generally benefit from data normalization.
@@ -79,9 +73,36 @@ We followed the following experimental set-up:
 4. Save the number of clusters, for each image and feature space, in a dictionary for later use by K-Means.
 5. Assign clustering labels to image pixels (basically, perform a mapping from feature space to image space). Save segmented images to disk in a format expected by the benchmarking code.
 
-### Mean Shift
+Below is an [illustration](https://cs-6476-project.herokuapp.com/?q=118015) of outputs for the Mean Shift algorithm:
 
-**TODO** @Anand _See TODO above_
+<div class="resultsContainer">
+  <div class="resultImageContainer">
+    <img src="assets/boat_118015/original.jpg" />
+    Original image
+  </div>
+  <div class="resultImageContainer">
+    <img src="assets/boat_118015/118015_ground_truth0.png" />
+    <span>Ground truth, <span class="italic">segs=21</span></span>
+  </div>
+  <div class="resultImageContainer">
+    <img src="assets/boat_118015/118015_MeanShift_RGB_space.png" />
+    <span>RGB space, <span class="italic">segs=7</span></span>
+  </div>
+    <div class="resultImageContainer">
+    <img src="assets/boat_118015/118015_Mean_Shift_HSV_space.png" />
+    <span>HSV space, <span class="italic">segs=7</span></span>
+  </div>
+    <div class="resultImageContainer">
+    <img src="assets/boat_118015/118015_Mean_Shift_RGB+Pos_space.png" />
+    <span>RGB + Pos space, <span class="italic">segs=9</span></span>
+  </div>
+    <div class="resultImageContainer">
+    <img src="assets/boat_118015/118015_Mean_Shift_HSV+Pos_space.png" />
+    <span>HSV + Pos space, <span class="italic">segs=9</span></span>
+  </div>
+</div>
+
+In this example, Mean Shift is able to clearly segment the sky from the rest of the image, but has some trouble picking up on the boat in the foreground. The feature spaces with position seem to be better at distinguishing continuous elements such as the walkway. This creates nuanced segments which weren't included in the hand labeled ground truth image.
 
 ### K-Means
 
