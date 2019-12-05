@@ -16,6 +16,11 @@
   height: 180px;
 }
 
+.resultsContainer .house {
+  width: 180px;
+  height: auto;
+}
+
 .largerHeight {
   height: 250px !important;
 }
