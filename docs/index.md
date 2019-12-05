@@ -54,16 +54,18 @@ We used Scikit-learn’s implementation of K-Means and Mean Shift. The bandwidth
 
 One drawback of using K-Means is that one has to specify the number of clusters. To avoid blindly trying different ‘k’ values for each image and each feature space, we used the number of modes picked up by Mean Shift as the value of ‘k’ for that particular image and that feature space. Instead of manually looking at each image, and guessing the number of clusters for each feature space of that image, we were able to automate the process and save a great deal of time and computer resources. We believe this choice is justified since it represents domain knowledge injection into our problem.
 
-We used the benchmarking code provided by the BSDS500 dataset maintainers to obtain our metrics. This ensured that our metrics were reliably computed and were in a format that is easy to compare with existing benchmarks. The following metrics were computed for each algorithm and feature space:
+We used the benchmarking code provided by the BSDS500 dataset maintainers to compute the following metrics reliably:
 
-1. F-measure; used to evaluate segment boundaries. [2]
+1. F-measure; used to evaluate contour lines obtained from segmented regions. [2]
 2. Probabilistic Rand Index (PRI), Variation of Information (VOI) and Segmentation Covering; region-based metrics used to evaluate the quality of segments. [2]
 
-An obstacle we faced was figuring out how to convert our segmented images into a format that can be interpreted by the benchmarking code. This was especially challenging since we wrote our code in Python, but the benchmarking code has been written in MATLAB.
+An obstacle we faced was figuring out how to convert our segmented images into a format that could be interpreted by the benchmarking code. It was especially challenging since we wrote our code in Python, but the benchmarking code has been written in MATLAB.
 
 **TODO** @Sanskriti _Mention libraries used to implement Normalized Cut. Any obstacles faced? Any design choices, or judgment calls?_
 
-For the state-of-the-art deep learning approach, we chose the Context Encoding Network (EncNet) implementation by H. Zhang et al. (2018) [3]. The training code and pre-trained models are readily available on [GitHub](https://github.com/zhanghang1989/PyTorch-Encoding). We decided against taking a transfer learning approach since the BSDS500 dataset lacks class labels, so tuning a larger, pre-trained EncNet on BSDS500 was not possible without a lot of manual annotation work. In some sense, this is good test of EncNet's ability to generalize to a novel dataset that it has not seen before.
+**TODO** @Prabhav _Mention the limitation of our Normalized Cut implementation to explain why incorporating position into the feature space degrades the results._
+
+For the state-of-the-art deep learning approach, we chose the Context Encoding Network (EncNet) implementation by H. Zhang et al. (2018) [3]. The training code and pre-trained models are readily available on [GitHub](https://github.com/zhanghang1989/PyTorch-Encoding). We decided against taking a transfer learning approach since the BSDS500 dataset lacks class labels, so tuning a larger, pre-trained EncNet on BSDS500 was not possible without a lot of manual annotation work. In some sense, this is a good test of EncNet's ability to generalize to a novel dataset that it has not seen before.
 
 ## Experiments and Results
 
@@ -85,7 +87,7 @@ We followed the following experimental set-up:
 
 ### K-Means
 
-The process described above was repeated for K-Means (leaving out certain Mean Shift specific steps). Sample [output](https://cs-6476-project.herokuapp.com/?q=235098) for all feature spaces is shown below:
+For K-Means, we repeated the process described above but left out certain Mean Shift specific steps. Sample [output](https://cs-6476-project.herokuapp.com/?q=235098) for all feature spaces is shown below:
 
 <div class="resultsContainer">
   <div class="resultImageContainer">
@@ -114,7 +116,7 @@ The process described above was repeated for K-Means (leaving out certain Mean S
   </div>
 </div>
 
-For this particular image, all feature spaces do a reasonably good job. The impact of adding position is very apparent based on the output above - the sky is segmented into more parts when pixel position is taken into account.
+For this particular image, all feature spaces do a reasonably good job. The impact of adding position is very apparent based on the output above - the sky is segmented into more parts when the pixel position is taken into account.
 
 ### Normalized Cut
 
@@ -122,7 +124,7 @@ For this particular image, all feature spaces do a reasonably good job. The impa
 
 ### EncNet_ResNet101_PContext
 
-We treated the EncNet implementation as a black box and did not make any modifications to the existing codebase. The pre-trained model uses the ResNet-101 convolutional neural network as a basic feature extractor and the PASCAL-Context dataset for training, which is a standard semantic segmentation dataset consisting of about 30k images and 400+ labels. The model made predictions on raw, test image data, and was not fed hand-crafted, feature-space specific features. Here is an [illustration](https://cs-6476-project.herokuapp.com/?q=80085) of the output we obtain:
+We treated the EncNet implementation as a black box and did not make any modifications to the existing codebase. The pre-trained model uses the ResNet-101 convolutional neural network as a basic feature extractor and the PASCAL-Context dataset for training, which is a standard semantic segmentation dataset consisting of about 30k images and 400+ labels. Unlike our other approaches, the model made predictions on raw, test image data instead of hand-crafted, feature-space specific features. Here is an [illustration](https://cs-6476-project.herokuapp.com/?q=80085) of the output we obtain:
 
 <div class="resultsContainer">
   <div class="resultImageContainer">
@@ -139,18 +141,18 @@ We treated the EncNet implementation as a black box and did not make any modific
   </div>
 </div>
 
-The EncNet approach is very good at segmenting individual objects from the background scene; however, it scarcely divides up different parts that make up an individual. In the ground truth image above, the lady in the foreground is divided into at least four different segments but EncNet uses just one segment. This is not necessarily a bad thing, it really depends on a case-by-case basis whether individuals should be represented by more than one segment.
+The EncNet approach is very good at segmenting individual entities from the background scene; however, it scarcely divides up different parts that make up an individual. In the ground truth image above, the lady in the foreground is divided into at least four different segments, but EncNet uses just one segment. This is not necessarily a bad thing; whether or not more than one segment should be used per entity depends on a case-by-case basis.
 
 ### Quantitative Results
 
 We ran our benchmarking code on a total of 2600 segmented images (200 test images × 4 feature spaces/image × 3 approaches with feature spaces + 200 test images × 1 approach without feature spaces) and 200 ground truth segments.
 
-**TODO** @Prabhav _Add/Edit content related to final update. Don't forget the graph!_
+<br/>
 
 The following graph summarizes the F-measure metric:
 
 <div id="graphContainer">
-  <img src="assets/f_measure_graph.png" id="graph"/>
+  <img src="assets/f_measure_graph.png" id="graph" />
 </div>
 
 <!--
@@ -171,29 +173,29 @@ The following graph summarizes the F-measure metric:
 | EncNet                          |   0.44    |
 -->
 
-The following table summarizes our region-based metrics:
+We observe that Normalized Cut achieves the highest F-measure scores across all feature spaces. In general, Normalized Cut divided images into a greater number of segments, so it was able to predict boundaries better than other algorithms. Mean Shift with HSV + Position feature space (F = 0.50) trails close behind. While none of the approaches came close to beating human-level performance (F = 0.79), a few achieved higher Recall than human performance. Notably, K-Means with RGB Space achieves a Recall close to 1, but that comes at the cost of low Precision. It seems this simple approach picked up the actual boundaries, but also quite a few false positives. EncNet performs modestly - pre-trained models usually need to be fine-tuned to specific datasets to achieve optimal performance; however, as discussed earlier, the BSDS500 dataset is not suitable for this purpose. Additionally, deep learning segmentation models are typically evaluated using a different set of metrics such as mean Intersection over Union and pixel Accuracy. [3]
+
+<br/>
+
+The following table summarizes the region-based metrics (in descending order of overall performance):
 
 | Segmentation Approach           | PRI  | VOI  | Covering |
 | ------------------------------- | :--: | ---- | -------- |
-| K-Means, RGB space              | 0.69 | 3.32 | 0.32     |
-| Mean Shift, RGB space           | 0.67 | 2.88 | 0.39     |
-| Normalized Cut, RGB space       | 0.75 | 2.19 | 0.50     |
-| K-Means, HSV space              | 0.69 | 3.00 | 0.36     |
-| Mean Shift, HSV space           | 0.61 | 2.47 | 0.41     |
+| EncNet                          | 0.74 | 2.06 | 0.52     |
 | Normalized Cut, HSV space       | 0.75 | 2.16 | 0.51     |
-| K-Means, RGB + Pos space        | 0.71 | 2.63 | 0.36     |
-| Mean Shift, RGB + Pos space     | 0.70 | 2.60 | 0.40     |
-| Normalized Cut, RGB + Pos space | 0.75 | 2.68 | 0.44     |
-| K-Means, HSV + Pos space        | 0.73 | 2.79 | 0.37     |
+| Normalized Cut, RGB space       | 0.75 | 2.19 | 0.50     |
 | Mean Shift, HSV + Pos space     | 0.70 | 2.41 | 0.44     |
 | Normalized Cut, HSV + Pos space | 0.76 | 2.65 | 0.45     |
-| EncNet                          | 0.74 | 2.06 | 0.52     |
+| Normalized Cut, RGB + Pos space | 0.75 | 2.68 | 0.44     |
+| Mean Shift, RGB + Pos space     | 0.70 | 2.60 | 0.40     |
+| Mean Shift, HSV space           | 0.61 | 2.47 | 0.41     |
+| K-Means, RGB + Pos space        | 0.71 | 2.63 | 0.36     |
+| K-Means, HSV + Pos space        | 0.73 | 2.79 | 0.37     |
+| Mean Shift, RGB space           | 0.67 | 2.88 | 0.39     |
+| K-Means, HSV space              | 0.69 | 3.00 | 0.36     |
+| K-Means, RGB space              | 0.69 | 3.32 | 0.32     |
 
-Given that a human performs with F = 0.79, our vanilla implementations of simple clustering algorithms don’t perform too bad (Mean Shift obtains F = 0.50).
-
-Mean Shift, across feature spaces, has (marginally) better F-measure values than K-Means. We also see higher Probabilistic Rand Index and lower Variation of Information with Mean Shift.
-
-As far as feature spaces are concerned, HSV + Position achieves the best metrics, and RGB + Position. This makes sense as we can take into account more information with these feature spaces.
+EncNet and Normalized Cut with HSV space perform the best here. Their Probabilistic Rand Index and Covering scores are amongst the highest, and their Variation of Information scores are the lowest. As far as feature spaces are concerned, HSV + Position generally produces a higher quality of segmented regions. With Normalized Cut, however, incorporating position into the feature space hurts performance. The limitation in our implementation of the algorithm (discussed in the approaches section) could explain this.
 
 ## Qualitative Results
 
@@ -263,7 +265,7 @@ We illustrate our results for a sample image:
   </div>
 </div>
 
-To view more results, please visit the website: <https://cs-6476-project.herokuapp.com>. On every page load, the website randomly picks an image from the test set and displays the corresponding segmented images.
+To view more results, please visit the website: <https://cs-6476-project.herokuapp.com>. On every page load, the site randomly picks an image from the test set and displays the corresponding segmented images.
 
 ## Conclusion and Futurework
 
@@ -291,4 +293,4 @@ July 2001.
 
 ### [Link to project proposal](./proposal.md)
 
-### [Link to midterm update](./midterm.md)
+### [Link to midterm update](./midterm.md) (_UI is broken, please refer for content only_)
