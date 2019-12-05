@@ -318,9 +318,9 @@ To view more results, please visit the website: <https://cs-6476-project.herokua
 
 ## Conclusion and Futurework
 
-**TODO** @Sanskriti _Add/Edit content related to final update. "In the Conclusions section, you should re-iterate the goals that you had laid out in your mid-term update and clearly mention whether you were able to accomplish those goals. If not, then what were the reasons. Also, in the Future Work section, you should mention any interesting extensions of your project that you can think of."_
+Our goal with this project was to compare various segmentation techniques with today's state of the art methods. We also aimed to explore different feature spaces and their effects on resulting segmentations. We succeeded in accomplishing our mid-term goal of comparing clustering, graph-based, and deep learning algorithms for our experiment. We also reached our target of trying various feature spaces, by trying four in total. We determined that Normalized Cut and EncNet had the best overall performance, and HSV + Position was the most succesful feature space across the algorithms.
 
-~~In the coming weeks, we would like to repeat the same process for two graph-based and a deep-learning, state-of-the-art approaches. We will also aim to incorporate texture as a feature space in computing our results.~~
+In the future, we would like to try another graph-based approach such as Min-Cut – we did not include it in our project due to the lack of a standard library to perform the required operations. To extend this work further, even more feature spaces could be tested such as texture and depth. With the advent of computer vision technology in mainstream products, segmentation will be increasingly important for scene understanding and object recognition. This work can help understand which segmentation methods can be useful across diverse applications.
 
 ## References
 
